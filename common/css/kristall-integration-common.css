@@ -1,0 +1,176 @@
+.kristall-integration__billing-info__tabs {
+  --krl-tab-btn-bg: #fff;
+  --krl-tab-btn-text: #424242;
+  --krl-tab-btn-border: #ddd;
+  --krl-tab-btn-active-bg: #1e88e5;
+  --krl-tab-btn-active-text: #fff;
+  --krl-tab-btn-active-border: rgba(0, 0, 0, 0);
+  --krl-tab-btn-active-shadow: rgba(102, 179, 251, 0.5);
+  --krl-tab-btn-hover-bg: #1d2127;
+  --krl-tab-btn-hover-text: #fff;
+  --krl-tab-btn-hover-border: rgba(0, 0, 0, 0);
+  --krl-tab-btn-padding: 0.425rem .75rem;
+  --krl-tab-btn-border-size: 2px;
+}
+
+.kristall-integration__billing-info__tabs > .woocommerce-input-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.kristall-integration__billing-info__tabs input {
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  width: 1rem;
+  height: 1.25rem;
+  opacity: 0;
+}
+
+.kristall-integration__billing-info__tabs label {
+  margin: 0 !important;
+  padding: var(--krl-tab-btn-padding);
+  box-sizing: border-box;
+  display: block;
+  line-height: 1.3333;
+  border: solid var(--krl-tab-btn-border-size) var(--krl-tab-btn-border);
+  background: var(--krl-tab-btn-bg);
+  color: var(--krl-tab-btn-text);
+  font-size: inherit;
+  text-align: center;
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  /* transition: border-color .15s ease-out, color .25s ease-out, background-color .15s ease-out, box-shadow .15s ease-out; */
+  cursor: pointer;
+  flex: 0 0 auto;
+  z-index: 0;
+}
+
+.kristall-integration__billing-info__tabs label ~ label {
+  margin-left: 8px !important;
+}
+
+.kristall-integration__billing-info__tabs label:hover {
+  color: var(--krl-tab-btn-hover-text);
+  border-color: var(--krl-tab-btn-hover-border);
+  background: var(--krl-tab-btn-hover-bg);
+}
+
+.kristall-integration__billing-info__tabs :checked + label {
+  z-index: 1;
+  background: var(--krl-tab-btn-active-bg);
+  border-color: var(--krl-tab-btn-active-border);
+  color: var(--krl-tab-btn-active-text);
+  box-shadow: 0 0 10px var(--krl-tab-btn-active-shadow);
+}
+
+@keyframes kristall-integration-modal-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.kristall_integration__modal_opened {
+  overflow: hidden;
+}
+
+.kristall_integration__modal {
+  display: block;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  max-width: 100%;
+  width: max-content;
+  z-index: 999999999;
+  animation: kristall-integration-modal-in .3s ease-in-out;
+  max-height: 100vh;
+  overflow: auto;
+}
+
+.kristall_integration__modal > * {
+  max-width: 100%;
+}
+
+.kristall_integration__modal_overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .65);
+  z-index: 999999998;
+  animation: kristall-integration-modal-in .3s ease-in-out;
+}
+
+.kristall-integration__description_blocks {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0 0 0;
+}
+
+.kristall-integration__description_block {
+  background: #f5f5f5;
+  padding: 30px 30px 30px calc(60px + 80px);
+  font-size: 18px;
+  width: 100%;
+  max-width: 600px;
+  line-height: 1.5;
+  position: relative;
+  margin: 0 auto 30px auto;
+}
+
+.kristall-integration__description_block::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #0188cc;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  top: 100%;
+  left: 50%;
+  transform: rotate(-45deg) translate(-70%, -8px);
+}
+
+.kristall-integration__description_block:last-child::after {
+  display: none;
+}
+
+.kristall-integration__description_block svg,
+.kristall-integration__description_block img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.kristall-integration__page_lock > .page-wrapper,
+.kristall-integration__page_lock > .page-wrapper * {
+  user-select: none !important;
+  pointer-events: none !important;
+}
+
+.kristall-integration__page_loading::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999997;
+  background: rgba(255, 255, 255, .5);
+  animation-duration: .3s;
+  animation-name: kristall-integration__page_loading-anim;
+  animation-fill-mode: forwards;
+}
+
+@keyframes kristall-integration__page_loading-anim {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

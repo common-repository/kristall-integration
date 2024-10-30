@@ -1,0 +1,482 @@
+.d-none {
+  display: none !important;
+}
+
+.woocommerce-shipping-fields,
+.woocommerce-additional-fields,
+.woocommerce-checkout-payment > :not(.place-order),
+.woocommerce-billing-fields > h3:not(.kristall-integration__checkout_header) {
+  display: none !important;
+}
+
+.kristall-integration__checkout_header {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.kristall-integration__checkout_header ~ .kristall-integration__checkout_header {
+  margin-top: 1.5rem;
+}
+
+.kristall-integration__checkout_field {
+  --input-bg: #fff;
+  --input-disabled-color: #999;
+  --input-disabled-border-color: #eee;
+  --input-disabled-border-color-invalid: #e2a6b3;
+  --input-color: #222;
+  --input-padding-x: 1.25rem;
+  --input-padding-t: 27px;
+  --input-padding-b: 9px;
+  --input-font-size: 14px;
+  --input-line-height: 1.42857;
+  --input-border-width: 1px;
+  --input-border-color: rgba(0,0,0,.12);
+  --input-placeholder-color: #777;
+  --input-border-radius: 0;
+  --input-flabel-font-size: 12px;
+  --input-flabel-font-weight: 500;
+  --input-border-color-invalid: #c77687;
+  --input-checkmark-size: 20px;
+  --input-checkmark-color: #5A9E04;
+
+  position: relative;
+  margin-bottom: 1.125rem;
+}
+
+.kristall-integration__checkout_check {
+  display: none;
+  color: var(--input-checkmark-color);
+  background: var(--input-bg);
+  width: var(--input-checkmark-size);
+  height: var(--input-checkmark-size);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+}
+
+.kristall-integration__checkout_check svg {
+  display: block;
+  width: var(--input-checkmark-size);
+  height: var(--input-checkmark-size);
+}
+
+.krl-flinfo-confirmed ~ div input[name=billing_phone] ~ .kristall-integration__checkout_check,
+.krl-ulinfo-confirmed ~ div input[name=billing_inn] ~ .kristall-integration__checkout_check,
+.krl-ulinfo-confirmed ~ div input[name=billing_ogrn] ~ .kristall-integration__checkout_check {
+  display: block;
+}
+
+.kristall-integration__checkout_field input { 
+  width: 100%;
+  height: auto !important;
+  font-size: var(--input-font-size) !important;
+  line-height: var(--input-line-height) !important;
+  border: var(--input-border-width) solid var(--input-border-color) !important;
+  padding: var(--input-padding-t) var(--input-padding-x) var(--input-padding-b) var(--input-padding-x) !important;
+  box-sizing: border-box !important;
+  background-color: var(--input-bg) !important;
+  color: var(--input-color) !important;
+  border-radius: var(--input-border-radius) !important;
+  transition: border-color .2s;
+  background-clip: padding-box;
+}
+
+.kristall-integration__checkout_field input:not([type=checkbox]):not([type=radio])[disabled],
+.kristall-integration__checkout_field input:not([type=checkbox]):not([type=radio]):disabled {
+  background-color: var(--input-bg) !important;
+  color: var(--input-disabled-color) !important;
+  border-color: var(--input-disabled-border-color) !important;
+  pointer-events: none;
+}
+.kristall-integration__checkout_field input.krl-invalid:not([type=checkbox]):not([type=radio])[disabled],
+.kristall-integration__checkout_field input.krl-invalid:not([type=checkbox]):not([type=radio]):disabled {
+  border-color: var(--input-disabled-border-color-invalid) !important;
+}
+
+.woocommerce-billing-fields input[type=checkbox][disabled],
+.woocommerce-billing-fields input[type=checkbox]:disabled {
+  opacity: .5;
+  pointer-events: none;
+}
+
+.kristall-integration__billing-info__tabs input[disabled] ~ label,
+.kristall-integration__billing-info__tabs input:disabled ~ label {
+  opacity: .5;
+  pointer-events: none;
+}
+
+#place_order {
+  align-self: flex-start;
+}
+
+#place_order[disabled],
+#place_order:disabled {
+  opacity: .5;
+  pointer-events: none;
+}
+
+div.kristall-integration__partner-modal {
+  padding: 30px;
+  max-width: 500px;
+  width: 500px;
+  background: #fff;
+  box-shadow: 0 0 30px 10px rgba(0, 0, 0, .1);
+}
+
+.kristall-integration__partner-modal label {
+  display: block;
+  width: 100%;
+}
+
+.kristall-integration__partner-modal label {
+  margin-bottom: 5px;
+}
+
+.kristall-integration__partner-modal [type=text]:focus {
+  border-color: var(--porto-primary-color);
+}
+
+.kristall-integration__partner-wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.kristall-integration__partner-wrapper * {
+  display: block;
+}
+
+.kristall-integration__partner-wrapper [type=text] {
+  flex: 1 1 auto;
+}
+
+.kristall-integration__partner-wrapper [type=button] {
+  flex: 0 1 auto;
+}
+
+.kristall-integration__buy_now_btn {
+  display: inline-block;
+  margin: 0;
+  width: auto;
+  padding: 0;
+}
+
+.kristall-integration__checkout_field input.krl-invalid { 
+  border-color: var(--input-border-color-invalid) !important;
+}
+
+.kristall-integration__checkout_field input::placeholder {
+  color: transparent !important;
+}
+
+.kristall-integration__checkout_field label {
+  position: absolute;
+  left: calc(var(--input-padding-x) - 4px);
+  padding: 0 4px;
+  transform-origin: 0 0;
+  top:50%;
+  transform: translateY(-50%);
+  cursor: text;
+  overflow: hidden;
+  text-align: start;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+  font-size: var(--input-font-size);
+  line-height: var(--input-line-height);
+  background-color: var(--input-bg);
+  font-weight: 400;
+  color: var(--input-placeholder-color);
+  transition: font-size .1s linear, font-weight .1s linear, top .1s linear;
+}
+
+.kristall-integration__checkout_field input:focus ~ label,
+.kristall-integration__checkout_field input:not(:placeholder-shown) ~ label {
+  top: calc(var(--input-padding-b) * 2);
+  font-size: var(--input-flabel-font-size);
+  font-weight: var(--input-flabel-font-weight);
+}
+.kristall-integration__checkout_field input:-webkit-autofill ~ label {
+  top: calc(var(--input-padding-b) * 2);
+  font-size: var(--input-flabel-font-size);
+  font-weight: var(--input-flabel-font-weight);
+}
+
+.kristall-integration__checkout_field.required label::after {
+  content: "*";
+  display: inline-block;
+  padding-left: 1px;
+  color: #c10000;
+  font-size: .9em;
+  vertical-align: top;
+}
+
+.woocommerce-billing-fields .woocommerce-billing-fields__field-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.kristall-integration__checkout_2cols {
+  --cols-spacing: 1rem;
+  display: flex;
+  width: 100%;
+}
+
+.kristall-integration__checkout_2cols > * {
+  width: 100%;
+  flex: 1 1 auto;
+}
+
+.kristall-integration__checkout_2cols > * + * {
+  margin-left: var(--cols-spacing);
+}
+
+.woocommerce-billing-fields .kristall-integration__billing-info__tabs {
+  margin-bottom: 1.5rem;
+}
+
+.kristall-integration__billing-info__tabs:not(.organization) ~ .kristall-integration__checkout_cbase {
+  display: none;
+}
+
+.client_info:not(.krl-flinfo-required) ~ .kristall-integration__checkout_pinfo,
+.client_info:not(.krl-ulinfo-required) ~ .kristall-integration__checkout_cinfo {
+  display: none;
+}
+
+.kristall-integration__verification__modal {
+  --modal-bg: #fff;
+  --modal-padding: 30px;
+  --modal-width: 500px;
+  --modal-border-radius: 3px;
+  --code-input-border-radius: 3px;
+
+  background: var(--modal-bg);
+  width: var(--modal-width);
+  padding: var(--modal-padding);
+  border-radius: var(--modal-border-radius);
+}
+
+.kristall-integration__verification__modal h1 {
+  font-size: 1.6em;
+  font-weight: bold;
+  line-height: 1;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 1rem 0;
+}
+
+.kristall-integration__verification__modal p {
+  margin: 0 0 1rem 0;
+  line-height: 1.6;
+}
+
+.kristall-integration__verification__cancel {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  box-sizing: content-box;
+  margin: -5px -5px 0 0;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  line-height: 30px;
+  padding: 0;
+  text-align: center;
+  color: #444;
+  background: none;
+  border: 0;
+  opacity: .5;
+  font-weight: normal;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.kristall-integration__verification__cancel:hover,
+.kristall-integration__verification__cancel:focus {
+  opacity: 1;
+}
+
+.kristall-integration__verification__code {
+  text-align: center;
+}
+
+.kristall_integration__modal .kristall-integration__verification__input,
+.kristall_integration__modal .kristall-integration__verification__input::placeholder {
+  line-height: 1.42857 !important;
+  vertical-align: middle !important;
+  font-size: 24px !important;
+  letter-spacing: 6px !important;
+  text-align: center !important;
+  display: inline-block !important;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+}
+
+.kristall_integration__modal .kristall-integration__verification__input::placeholder {
+  color: #aaa !important;
+}
+
+.kristall_integration__modal .kristall-integration__verification__input {
+  color: #444 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 8px 12px !important;
+  border-radius: var(--code-input-border-radius) !important;
+  height: auto !important;
+  border: 1px solid #ccc !important;
+  background: #fff !important;
+  width: 120px !important;
+}
+
+.kristall-integration__verification__message {
+  color: #236239;
+  background-color: #def4e5;
+  border-color: #c2ecd0;
+  padding: 10px;
+  line-height: 1.4;
+  border-radius: 3px;
+  margin: 0 0 1rem 0 !important;
+}
+
+.kristall-integration__verification__error {
+  color: #792334;
+  background-color: #fcdee4;
+  border-color: #fac2cd;
+  padding: 10px;
+  line-height: 1.4;
+  border-radius: 3px;
+  margin: 0 0 1rem 0 !important;
+}
+
+/* .kristall-integration__verification__error:not(.d-none) + .kristall-integration__verification__wrapper  {
+  display: none;
+} */
+
+.kristall_integration__modal .kristall-integration__verification__input:disabled,
+.kristall_integration__modal .kristall-integration__verification__input[disabled] {
+  background: rgba(0,0,0,.03) !important;
+}
+
+.kristall-integration__verification__resend.disabled a {
+  opacity: .5;
+  pointer-events: none;
+  pointer: default;
+}
+
+.kristall-integration__verification__resend {
+  margin: .75rem 0 0 0 !important;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.kristall-integration__verification__resend {
+  font-size: .9em;
+}
+
+.kristall-integration__verification__resend > span {
+  color: #ccc;
+}
+
+.kristall-integration__verification__resend > a {
+  text-decoration: underline;
+}
+
+.kristall-integration__verification__resend > a:hover {
+  text-decoration: none;
+}
+
+.kristall-integration__verification__select-wrapper ~ * {
+  display: none !important;
+}
+
+.kristall-integration__verification__modal.modal-locked {
+  position: relative;
+  user-select: none;
+  pointer-events: none;
+}
+
+.kristall_integration__modal.modal-locked::before {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 1000;
+  background: rgba(255,255,255,.5);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 3px;
+}
+
+.kristall_integration__modal.modal-locked::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -2rem 0 0 -2rem;
+  width: 4rem;
+  height: 4rem;
+  border: 3px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: 0.7s linear infinite krl-modal-locked-spinner;
+  color: #2095f3;
+  z-index: 1001;
+}
+
+@keyframes krl-modal-locked-spinner {
+  to { transform: rotate(360deg); }
+}
+
+.kristall-integration__verification__dcode {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 10px;
+  line-height: 1.4;
+  border-radius: 3px;
+  border: 1px solid #cdecd6;
+}
+
+.kristall-integration__verification__dcode > * {
+  display: block;
+  flex: 1 1 auto;
+}
+
+.kristall-integration__verification__dcode img {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  margin-right: 10px;
+}
+
+.kristall-integration__verification__resend_elapsed_time {
+  color: #bbb !important;
+  margin-left: 10px;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: .9em;
+  display: none;
+}
+
+.has-timeout > .kristall-integration__verification__resend_elapsed_time {
+  display: inline;
+}
+
+.kristall-integration__verification__dcode__prices {
+  margin-left: auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.kristall-integration__verification__dcode__prices > span:first-child {
+  text-decoration: line-through;
+  opacity: .5;
+}
+
+.kristall-integration__verification__dcode__prices > span:last-child {
+  font-weight: bold;
+  color: #469e65;
+}

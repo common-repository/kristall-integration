@@ -1,0 +1,816 @@
+.krtree-helper-hidden {
+  display: none;
+}
+.krtree-helper-indeterminate-cb {
+  color: #777;
+}
+.krtree-helper-disabled {
+  color: #c0c0c0;
+}
+/* Helper to allow spinning loader icon with glyph-, ligature-, and SVG-icons. */
+.krtree-helper-spin {
+  -webkit-animation: spin 1000ms infinite linear;
+  animation: spin 1000ms infinite linear;
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+/*------------------------------------------------------------------------------
+ * Container and UL / LI
+ *----------------------------------------------------------------------------*/
+ul.krtree-container {
+  font-family: tahoma, arial, helvetica;
+  font-size: 10pt;
+  white-space: nowrap;
+  padding: 3px;
+  margin: 0;
+  min-height: 0%;
+  position: relative;
+  outline: 0;
+}
+ul.krtree-container ul {
+  padding: 0 0 0 16px;
+  margin: 0;
+}
+ul.krtree-container ul > li:before {
+  content: none;
+}
+ul.krtree-container li {
+  position: relative;
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  -moz-background-clip: border;
+  -moz-background-inline-policy: continuous;
+  -moz-background-origin: padding;
+  background-attachment: scroll;
+  background-color: transparent;
+  background-position: 0px 0px;
+  background-repeat: repeat-y;
+  background-image: none;
+  margin: 0;
+}
+ul.krtree-container li.krtree-lastsib {
+  background-image: none;
+}
+.ui-krtree-disabled ul.krtree-container {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+div.krtree-connectors:not(.krtree-ext-filter-hide) ul li:not(:last-child):before {
+	height: 100%;
+}
+
+div.krtree-connectors:not(.krtree-ext-filter-hide) ul li:last-child:before {
+	height: 10px;
+}
+
+div.krtree-connectors:not(.krtree-ext-filter-hide) > ul > li:before,
+div.krtree-connectors:not(.krtree-ext-filter-hide) > ul > li ul li:before {
+	content: '';
+	position: absolute;
+	margin-left: 8px;
+	border-left: 1px dotted #848484;
+	z-index: 1;
+}
+
+div.krtree-connectors:not(.krtree-ext-filter-hide) li > ul:before {
+	top: 20px;
+	content: '';
+	position: absolute;
+	margin-left: 8px;
+	border-left: 1px dotted #848484;
+	z-index: 1;
+	height: 14px;
+}
+
+div.krtree-connectors:not(.krtree-ext-filter-hide) ul li:after {
+	content: '';
+	position: absolute;
+	margin-left: 8px;
+	top: 10px;
+	width: 0.6rem;
+	border-bottom: 1px dotted #848484;
+}
+
+div.krtree-connectors:not(.krtree-ext-filter-hide) ul li:last-child:after {
+	top: 9px;
+}
+
+/*
+ul.krtree-connectors.krtree-container li {
+  background-image: url("vline.gif");
+  background-position: 0 0;
+}
+*/
+ul.krtree-container li.krtree-lastsib,
+ul.krtree-no-connector > li {
+  background-image: none;
+}
+li.krtree-animating {
+  position: relative;
+}
+/*------------------------------------------------------------------------------
+ * Common icon definitions
+ *----------------------------------------------------------------------------*/
+span.krtree-empty,
+span.krtree-vline,
+span.krtree-expander,
+span.krtree-icon,
+span.krtree-checkbox,
+span.krtree-drag-helper-img,
+#krtree-drop-marker {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: top;
+  background-repeat: no-repeat;
+  background-image: url("icons.gif");
+  background-position: 0px 0px;
+}
+span.krtree-icon,
+span.krtree-checkbox,
+span.krtree-expander,
+span.krtree-custom-icon {
+  margin-top: 0px;
+}
+/* Used by icon option: */
+span.krtree-custom-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  margin-left: 3px;
+  background-position: 0px 0px;
+}
+/* Used by 'icon' node option: */
+img.krtree-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 3px;
+  margin-top: 0px;
+  vertical-align: top;
+  border-style: none;
+}
+/*------------------------------------------------------------------------------
+ * Expander icon
+ *
+ * Note: IE6 doesn't correctly evaluate multiples class names,
+ *		 so we create combined class names that can be used in the CSS.
+ *
+ * Prefix: krtree-exp-
+ * 1st character: 'e': expanded, 'c': collapsed, 'n': no children
+ * 2nd character (optional): 'd': lazy (Delayed)
+ * 3rd character (optional): 'l': Last sibling
+ *----------------------------------------------------------------------------*/
+span.krtree-expander {
+  cursor: pointer;
+  position:relative;
+}
+
+span.krtree-expander::before {
+	content: '';
+	top: 0;
+	height: 23px;
+	position: absolute;
+	width: 18px;
+	cursor: pointer;
+	z-index: 10;
+}
+
+.krtree-exp-n span.krtree-expander,
+.krtree-exp-nl span.krtree-expander {
+  background-image: none;
+  cursor: default;
+}
+
+/*
+.krtree-connectors .krtree-exp-n span.krtree-expander,
+.krtree-connectors .krtree-exp-nl span.krtree-expander {
+  background-image: url("icons.gif");
+  margin-top: 0;
+}
+.krtree-connectors .krtree-exp-n span.krtree-expander,
+.krtree-connectors .krtree-exp-n span.krtree-expander:hover {
+  background-position: 0px -64px;
+}
+.krtree-connectors .krtree-exp-nl span.krtree-expander,
+.krtree-connectors .krtree-exp-nl span.krtree-expander:hover {
+  background-position: -16px -64px;
+}
+*/
+.krtree-exp-c span.krtree-expander {
+  background-position: 0px -80px;
+}
+.krtree-exp-c span.krtree-expander:hover {
+  background-position: -16px -80px;
+}
+.krtree-exp-cl span.krtree-expander {
+  background-position: 0px -96px;
+}
+.krtree-exp-cl span.krtree-expander:hover {
+  background-position: -16px -96px;
+}
+.krtree-exp-cd span.krtree-expander {
+  background-position: -64px -80px;
+}
+.krtree-exp-cd span.krtree-expander:hover {
+  background-position: -80px -80px;
+}
+.krtree-exp-cdl span.krtree-expander {
+  background-position: -64px -96px;
+}
+.krtree-exp-cdl span.krtree-expander:hover {
+  background-position: -80px -96px;
+}
+.krtree-exp-e span.krtree-expander,
+.krtree-exp-ed span.krtree-expander {
+  background-position: -32px -80px;
+  margin-top: 1px;
+}
+.krtree-exp-e span.krtree-expander:hover,
+.krtree-exp-ed span.krtree-expander:hover {
+  background-position: -48px -80px;
+}
+.krtree-exp-el span.krtree-expander,
+.krtree-exp-edl span.krtree-expander {
+  background-position: -32px -96px;
+}
+.krtree-exp-el span.krtree-expander:hover,
+.krtree-exp-edl span.krtree-expander:hover {
+  background-position: -48px -96px;
+}
+/* Fade out expanders, when container is not hovered or active */
+.krtree-fade-expander span.krtree-expander {
+  transition: opacity 1.5s;
+  opacity: 0;
+}
+.krtree-fade-expander:hover span.krtree-expander,
+.krtree-fade-expander.krtree-treefocus span.krtree-expander,
+.krtree-fade-expander .krtree-treefocus span.krtree-expander,
+.krtree-fade-expander [class*="krtree-statusnode-"] span.krtree-expander {
+  transition: opacity 0.6s;
+  opacity: 1;
+}
+/*------------------------------------------------------------------------------
+ * Checkbox icon
+ *----------------------------------------------------------------------------*/
+span.krtree-checkbox {
+  margin-left: 3px;
+  background-position: 0px -32px;
+  position: relative;
+}
+span.krtree-checkbox:hover {
+  background-position: -16px -32px;
+}
+span.krtree-checkbox::before {
+	content: '';
+	top: 0;
+	height: 23px;
+	position: absolute;
+	width: 21px;
+	cursor: pointer;
+	z-index: 10;
+	left: -2px;
+}
+span.krtree-checkbox.krtree-radio {
+  background-position: 0px -48px;
+}
+span.krtree-checkbox.krtree-radio:hover {
+  background-position: -16px -48px;
+}
+.krtree-partsel span.krtree-checkbox {
+  background-position: -64px -32px;
+}
+.krtree-partsel span.krtree-checkbox:hover {
+  background-position: -80px -32px;
+}
+.krtree-partsel span.krtree-checkbox.krtree-radio {
+  background-position: -64px -48px;
+}
+.krtree-partsel span.krtree-checkbox.krtree-radio:hover {
+  background-position: -80px -48px;
+}
+.krtree-selected span.krtree-checkbox {
+  background-position: -32px -32px;
+}
+.krtree-selected span.krtree-checkbox:hover {
+  background-position: -48px -32px;
+}
+.krtree-selected span.krtree-checkbox.krtree-radio {
+  background-position: -32px -48px;
+}
+.krtree-selected span.krtree-checkbox.krtree-radio:hover {
+  background-position: -48px -48px;
+}
+.krtree-unselectable span.krtree-checkbox {
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+}
+.krtree-unselectable span.krtree-checkbox:hover {
+  background-position: 0px -32px;
+}
+.krtree-unselectable span.krtree-checkbox.krtree-radio:hover {
+  background-position: 0px -48px;
+}
+.krtree-unselectable.krtree-partsel span.krtree-checkbox:hover {
+  background-position: -64px -32px;
+}
+.krtree-unselectable.krtree-selected span.krtree-checkbox:hover {
+  background-position: -32px -32px;
+}
+.krtree-unselectable.krtree-selected span.krtree-checkbox.krtree-radio:hover {
+  background-position: -32px -48px;
+}
+.krtree-container.krtree-checkbox-auto-hide span.krtree-checkbox {
+  visibility: hidden;
+}
+.krtree-container.krtree-checkbox-auto-hide .krtree-node:hover span.krtree-checkbox,
+.krtree-container.krtree-checkbox-auto-hide tr:hover td span.krtree-checkbox,
+.krtree-container.krtree-checkbox-auto-hide .krtree-node.krtree-selected span.krtree-checkbox,
+.krtree-container.krtree-checkbox-auto-hide tr.krtree-selected td span.krtree-checkbox {
+  visibility: unset;
+}
+.krtree-container.krtree-checkbox-auto-hide.krtree-treefocus .krtree-node.krtree-active span.krtree-checkbox,
+.krtree-container.krtree-checkbox-auto-hide.krtree-treefocus tr.krtree-active td span.krtree-checkbox {
+  visibility: unset;
+}
+/*------------------------------------------------------------------------------
+ * Node type icon
+ * Note: IE6 doesn't correctly evaluate multiples class names,
+ *		 so we create combined class names that can be used in the CSS.
+ *
+ * Prefix: krtree-ico-
+ * 1st character: 'e': expanded, 'c': collapsed
+ * 2nd character (optional): 'f': folder
+ *----------------------------------------------------------------------------*/
+span.krtree-icon {
+  margin-left: 3px;
+  background-position: 0px 0px;
+}
+/* Documents */
+.krtree-ico-c span.krtree-icon:hover {
+  background-position: -16px 0px;
+}
+.krtree-has-children.krtree-ico-c span.krtree-icon {
+  background-position: -32px 0px;
+}
+.krtree-has-children.krtree-ico-c span.krtree-icon:hover {
+  background-position: -48px 0px;
+}
+.krtree-ico-e span.krtree-icon {
+  background-position: -64px 0px;
+}
+.krtree-ico-e span.krtree-icon:hover {
+  background-position: -80px 0px;
+}
+/* Folders */
+.krtree-ico-cf span.krtree-icon {
+  background-position: 0px -16px;
+}
+.krtree-ico-cf span.krtree-icon:hover {
+  background-position: -16px -16px;
+}
+.krtree-has-children.krtree-ico-cf span.krtree-icon {
+  background-position: -32px -16px;
+}
+.krtree-has-children.krtree-ico-cf span.krtree-icon:hover {
+  background-position: -48px -16px;
+}
+.krtree-ico-ef span.krtree-icon {
+  background-position: -64px -16px;
+}
+.krtree-ico-ef span.krtree-icon:hover {
+  background-position: -80px -16px;
+}
+.krtree-loading span.krtree-expander,
+.krtree-loading span.krtree-expander:hover,
+.krtree-statusnode-loading span.krtree-icon,
+.krtree-statusnode-loading span.krtree-icon:hover,
+span.krtree-icon.krtree-icon-loading {
+  background-image: url("loading.gif");
+  background-position: 0px 0px;
+}
+/* Status node icons */
+.krtree-statusnode-error span.krtree-icon,
+.krtree-statusnode-error span.krtree-icon:hover {
+  background-position: 0px -112px;
+}
+/*------------------------------------------------------------------------------
+ * Node titles and highlighting
+ *----------------------------------------------------------------------------*/
+span.krtree-node {
+  /* See #117 */
+  display: inherit;
+  width: 100%;
+  padding-top: 1px;
+  min-height: 16px;
+  position: relative;
+  margin-top: -1px;
+}
+span.krtree-title {
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  min-height: 16px;
+  padding: 0 3px 0 3px;
+  margin: 0px 0 0 3px;
+  border: 1px solid transparent;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+}
+span.krtree-node.krtree-error span.krtree-title {
+  color: red;
+}
+/*------------------------------------------------------------------------------
+ * Drag'n'drop support
+ *----------------------------------------------------------------------------*/
+/* ext-dnd5: */
+span.krtree-childcounter {
+  color: #fff;
+  background: #337ab7;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 2px;
+  text-align: center;
+}
+/* ext-dnd: */
+div.krtree-drag-helper span.krtree-childcounter,
+div.krtree-drag-helper span.krtree-dnd-modifier {
+  display: inline-block;
+  color: #fff;
+  background: #337ab7;
+  border: 1px solid gray;
+  min-width: 10px;
+  height: 10px;
+  line-height: 1;
+  vertical-align: baseline;
+  border-radius: 10px;
+  padding: 2px;
+  text-align: center;
+  font-size: 9px;
+}
+div.krtree-drag-helper span.krtree-childcounter {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+}
+div.krtree-drag-helper span.krtree-dnd-modifier {
+  background: #5cb85c;
+  border: none;
+  font-weight: bolder;
+}
+div.krtree-drag-helper.krtree-drop-accept span.krtree-drag-helper-img {
+  background-position: -32px -112px;
+}
+div.krtree-drag-helper.krtree-drop-reject span.krtree-drag-helper-img {
+  background-position: -16px -112px;
+}
+/*** Drop marker icon *********************************************************/
+#krtree-drop-marker {
+  width: 32px;
+  position: absolute;
+  background-position: 0px -128px;
+  margin: 0;
+}
+#krtree-drop-marker.krtree-drop-after,
+#krtree-drop-marker.krtree-drop-before {
+  width: 64px;
+  background-position: 0px -144px;
+}
+#krtree-drop-marker.krtree-drop-copy {
+  background-position: -64px -128px;
+}
+#krtree-drop-marker.krtree-drop-move {
+  background-position: -32px -128px;
+}
+/*** Source node while dragging ***********************************************/
+span.krtree-drag-source.krtree-drag-remove {
+  opacity: 0.15;
+}
+/*** Target node while dragging cursor is over it *****************************/
+/*------------------------------------------------------------------------------
+ * 'rtl' option
+ *----------------------------------------------------------------------------*/
+.krtree-container.krtree-rtl .krtree-title {
+  /*unicode-bidi: bidi-override;*/
+  /* optional: reverse title letters */
+}
+.krtree-container.krtree-rtl span.krtree-connector,
+.krtree-container.krtree-rtl span.krtree-expander,
+.krtree-container.krtree-rtl span.krtree-icon,
+.krtree-container.krtree-rtl span.krtree-drag-helper-img {
+  background-image: url("icons-rtl.gif");
+}
+.krtree-container.krtree-rtl .krtree-exp-n span.krtree-expander,
+.krtree-container.krtree-rtl .krtree-exp-nl span.krtree-expander {
+  background-image: none;
+}
+.krtree-container.krtree-rtl.krtree-connectors .krtree-exp-n span.krtree-expander,
+.krtree-container.krtree-rtl.krtree-connectors .krtree-exp-nl span.krtree-expander {
+  background-image: url("icons-rtl.gif");
+}
+ul.krtree-container.krtree-rtl ul {
+  padding: 0 16px 0 0;
+}
+ul.krtree-container.krtree-rtl.krtree-connectors li {
+  background-position: right 0;
+  background-image: url("vline-rtl.gif");
+}
+ul.krtree-container.krtree-rtl li.krtree-lastsib,
+ul.krtree-container.krtree-rtl.krtree-no-connector > li {
+  background-image: none;
+}
+#krtree-drop-marker.krtree-rtl {
+  background-image: url("icons-rtl.gif");
+}
+/*------------------------------------------------------------------------------
+ * 'table' extension
+ *----------------------------------------------------------------------------*/
+table.krtree-ext-table {
+  font-family: tahoma, arial, helvetica;
+  font-size: 10pt;
+  border-collapse: collapse;
+  /* ext-ariagrid */
+}
+table.krtree-ext-table span.krtree-node {
+  display: inline-block;
+  box-sizing: border-box;
+}
+table.krtree-ext-table td.krtree-status-merged {
+  text-align: center;
+  font-style: italic;
+  color: #c0c0c0;
+}
+table.krtree-ext-table tr.krtree-statusnode-error td.krtree-status-merged {
+  color: red;
+}
+table.krtree-ext-table.krtree-ext-ariagrid.krtree-cell-mode > tbody > tr.krtree-active > td {
+  background-color: #eee;
+}
+table.krtree-ext-table.krtree-ext-ariagrid.krtree-cell-mode > tbody > tr > td.krtree-active-cell {
+  background-color: #cbe8f6;
+}
+table.krtree-ext-table.krtree-ext-ariagrid.krtree-cell-mode.krtree-cell-nav-mode > tbody > tr > td.krtree-active-cell {
+  background-color: #3875d7;
+}
+/*------------------------------------------------------------------------------
+ * 'columnview' extension
+ *----------------------------------------------------------------------------*/
+table.krtree-ext-columnview tbody tr td {
+  position: relative;
+  border: 1px solid gray;
+  vertical-align: top;
+  overflow: auto;
+}
+table.krtree-ext-columnview tbody tr td > ul {
+  padding: 0;
+}
+table.krtree-ext-columnview tbody tr td > ul li {
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  -moz-background-clip: border;
+  -moz-background-inline-policy: continuous;
+  -moz-background-origin: padding;
+  background-attachment: scroll;
+  background-color: transparent;
+  background-position: 0px 0px;
+  background-repeat: repeat-y;
+  background-image: none;
+  /* no v-lines */
+  margin: 0;
+}
+table.krtree-ext-columnview span.krtree-node {
+  position: relative;
+  /* allow positioning of embedded spans */
+  display: inline-block;
+}
+table.krtree-ext-columnview span.krtree-node.krtree-expanded {
+  background-color: #e0e0e0;
+}
+table.krtree-ext-columnview span.krtree-node.krtree-active {
+  background-color: #cbe8f6;
+}
+table.krtree-ext-columnview .krtree-has-children span.krtree-cv-right {
+  position: absolute;
+  right: 3px;
+  background-position: 0px -80px;
+}
+table.krtree-ext-columnview .krtree-has-children span.krtree-cv-right:hover {
+  background-position: -16px -80px;
+}
+/*------------------------------------------------------------------------------
+ * 'filter' extension
+ *----------------------------------------------------------------------------*/
+.krtree-ext-filter-dimm span.krtree-node span.krtree-title {
+  color: #c0c0c0;
+  font-weight: lighter;
+}
+.krtree-ext-filter-dimm tr.krtree-submatch span.krtree-title,
+.krtree-ext-filter-dimm span.krtree-node.krtree-submatch span.krtree-title {
+  color: black;
+  font-weight: normal;
+}
+.krtree-ext-filter-dimm tr.krtree-match span.krtree-title,
+.krtree-ext-filter-dimm span.krtree-node.krtree-match span.krtree-title {
+  color: black;
+  font-weight: bold;
+}
+.krtree-ext-filter-hide tr.krtree-hide,
+.krtree-ext-filter-hide span.krtree-node.krtree-hide {
+  display: none;
+}
+.krtree-ext-filter-hide tr.krtree-submatch span.krtree-title,
+.krtree-ext-filter-hide span.krtree-node.krtree-submatch span.krtree-title {
+  color: #c0c0c0;
+  font-weight: lighter;
+}
+.krtree-ext-filter-hide tr.krtree-match span.krtree-title,
+.krtree-ext-filter-hide span.krtree-node.krtree-match span.krtree-title {
+  color: black;
+  font-weight: normal;
+}
+/* Hide expanders if all child nodes are hidden by filter */
+.krtree-ext-filter-hide-expanders tr.krtree-match span.krtree-expander,
+.krtree-ext-filter-hide-expanders span.krtree-node.krtree-match span.krtree-expander {
+  visibility: hidden;
+}
+.krtree-ext-filter-hide-expanders tr.krtree-submatch span.krtree-expander,
+.krtree-ext-filter-hide-expanders span.krtree-node.krtree-submatch span.krtree-expander {
+  visibility: visible;
+}
+.krtree-ext-childcounter span.krtree-icon,
+.krtree-ext-filter span.krtree-icon,
+.krtree-ext-childcounter span.krtree-custom-icon,
+.krtree-ext-filter span.krtree-custom-icon {
+  position: relative;
+}
+.krtree-ext-childcounter span.krtree-childcounter,
+.krtree-ext-filter span.krtree-childcounter {
+  color: #fff;
+  background: #777;
+  border: 1px solid gray;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 10px;
+  height: 10px;
+  line-height: 1;
+  vertical-align: baseline;
+  border-radius: 10px;
+  padding: 2px;
+  text-align: center;
+  font-size: 9px;
+}
+/*------------------------------------------------------------------------------
+ * 'wide' extension
+ *----------------------------------------------------------------------------*/
+ul.krtree-ext-wide {
+  position: relative;
+  min-width: 100%;
+  z-index: 2;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+ul.krtree-ext-wide span.krtree-node > span {
+  position: relative;
+  z-index: 2;
+}
+ul.krtree-ext-wide span.krtree-node span.krtree-title {
+  position: absolute;
+  z-index: 1;
+  left: 0px;
+  min-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/*------------------------------------------------------------------------------
+ * 'fixed' extension
+ *----------------------------------------------------------------------------*/
+.krtree-ext-fixed-wrapper .krtree-ext-fixed-hidden {
+  display: none;
+}
+.krtree-ext-fixed-wrapper div.krtree-ext-fixed-scroll-border-bottom {
+  border-bottom: 3px solid rgba(0, 0, 0, 0.75);
+}
+.krtree-ext-fixed-wrapper div.krtree-ext-fixed-scroll-border-right {
+  border-right: 3px solid rgba(0, 0, 0, 0.75);
+}
+.krtree-ext-fixed-wrapper div.krtree-ext-fixed-wrapper-tl {
+  position: absolute;
+  overflow: hidden;
+  z-index: 3;
+  top: 0px;
+  left: 0px;
+}
+.krtree-ext-fixed-wrapper div.krtree-ext-fixed-wrapper-tr {
+  position: absolute;
+  overflow: hidden;
+  z-index: 2;
+  top: 0px;
+}
+.krtree-ext-fixed-wrapper div.krtree-ext-fixed-wrapper-bl {
+  position: absolute;
+  overflow: hidden;
+  z-index: 2;
+  left: 0px;
+}
+.krtree-ext-fixed-wrapper div.krtree-ext-fixed-wrapper-br {
+  position: absolute;
+  overflow: scroll;
+  z-index: 1;
+}
+/*******************************************************************************
+ * Styles specific to this skin.
+ *
+ * Node titles
+ */
+.krtree-plain span.krtree-node {
+  border: 1px solid transparent;
+}
+.krtree-plain span.krtree-node:hover {
+  background-color: #E5F3FB;
+  border-color: #70C0E7;
+}
+.krtree-plain.krtree-container.krtree-treefocus span.krtree-node.krtree-focused {
+  border-color: #3399FF;
+}
+.krtree-plain span.krtree-node.krtree-active,
+.krtree-plain span.krtree-node.krtree-selected {
+  background-color: #F7F7F7;
+  border-color: #DEDEDE;
+}
+
+.krtree-plain.krtree-container.krtree-treefocus span.krtree-node.krtree-active,
+.krtree-plain.krtree-container.krtree-treefocus span.krtree-node.krtree-selected,
+.krtree-plain span.krtree-node.krtree-active:hover,
+.krtree-plain span.krtree-node.krtree-selected:hover {
+  background-color: #CBE8F6;
+  border-color: #26A0DA;
+}
+.krtree-plain .krtree-node.krtree-selected {
+  font-style: italic;
+}
+/*******************************************************************************
+ * 'table' extension
+ */
+table.krtree-ext-table tbody tr td {
+  border: 1px solid #EDEDED;
+}
+table.krtree-ext-table tbody span.krtree-node,
+table.krtree-ext-table tbody span.krtree-node:hover {
+  border: none;
+  background: none;
+}
+table.krtree-ext-table tbody tr:hover {
+  background-color: #E5F3FB;
+  outline: 1px solid #70C0E7;
+}
+table.krtree-ext-table tbody tr.krtree-focused span.krtree-title {
+  outline: 1px dotted black;
+}
+table.krtree-ext-table tbody tr.krtree-active:hover,
+table.krtree-ext-table tbody tr.krtree-selected:hover {
+  background-color: #CBE8F6;
+  outline: 1px solid #26A0DA;
+}
+table.krtree-ext-table tbody tr.krtree-active {
+  background-color: #F7F7F7;
+  outline: 1px solid #DEDEDE;
+}
+table.krtree-ext-table tbody tr.krtree-selected {
+  background-color: #F7F7F7;
+}
+table.krtree-ext-table.krtree-treefocus tbody tr.krtree-active {
+  background-color: #CBE8F6;
+  outline: 1px solid #26A0DA;
+}
+table.krtree-ext-table.krtree-treefocus tbody tr.krtree-selected {
+  background-color: #CBE8F6;
+}

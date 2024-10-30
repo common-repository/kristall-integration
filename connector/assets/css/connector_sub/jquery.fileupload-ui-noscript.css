@@ -1,0 +1,6 @@
+@charset "UTF-8";
+.fileinput-button i,
+.fileupload-buttonbar .delete,
+.fileupload-buttonbar .toggle {
+  display: none;
+}

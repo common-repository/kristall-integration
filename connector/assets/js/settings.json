@@ -1,0 +1,40 @@
+{
+	logo: {
+		type: 'img',
+		img: '',
+		url: ''
+	},
+	comName: {
+		type: 'wp',
+		wp: '',
+		custom: ''
+	},
+	comDesc: {
+		type: 'wp',
+		wp: '',
+		custom: ''
+	},
+	comNum: {
+		pred: 0;
+		inn: '',
+		КПП: '',
+		ОГРН: ''
+	},
+	headTxt: '',
+	phone: '',
+	mail: {
+		type: 'wp',
+		wp: '',
+		custom: ''
+	},
+	siteUrl: {
+		type: 'wp',
+		wp: '',
+		custom: ''
+	},
+	director: {
+		fullName: '',
+		position: ''
+	},
+	footerTxt: ''
+}

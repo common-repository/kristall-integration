@@ -1,0 +1,14 @@
+.kristall-integration__options_title {
+  padding-left: 12px !important;
+}
+
+.kristall-integration_product_type_field .wc-radios label {
+  margin-left: 0 !important;
+}
+
+.kristall-integration_single_in_cart_field,
+.kristall-integration_single_in_cart_field *,
+.kristall-integration_sold_individually_field,
+.kristall-integration_sold_individually_field * {
+  cursor: default !important;
+}

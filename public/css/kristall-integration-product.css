@@ -1,0 +1,16 @@
+.kristall-integration__warning {
+  color: #806f2c;
+  background-color: #fff9e1;
+  margin: 5px 0;
+  padding: 5px 10px;
+}
+
+.product-summary-wrap .product_meta span a,
+.product-summary-wrap .product_meta span span {
+  color: inherit !important;
+}
+
+.product_meta .sku_wrapper,
+.product_meta .posted_in {
+  display: none !important;
+}
